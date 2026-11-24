@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VanPak — School Van Live Tracker &amp; Safety (UX Concept)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">V</span> VanPak</div>
+  <p class="tagline">Know where your child is. Every ride, live. — School van live tracker &amp; safety for Pakistan</p>
+  <p class="sample-note">SAMPLE DATA — every van, time, fare, driver, school and child shown here is invented for this UX concept demo. The school names are real institutions used as sample examples, not partners. These are NOT real vans, real drivers, real children or real fares. No real CNIC numbers and no phone numbers appear anywhere.</p>
+</header>
+
+<nav class="tabs" aria-label="VanPak sections">
+  <button id="tab-tracker" class="tab-btn active" data-tab="tracker">Live Tracker</button>
+  <button id="tab-routes" class="tab-btn" data-tab="routes">Routes &amp; Fees</button>
+  <button id="tab-driver" class="tab-btn" data-tab="driver">Driver &amp; Safety</button>
+  <button id="tab-alerts" class="tab-btn" data-tab="alerts">Alerts &amp; Fees</button>
+</nav>
+
+<main>
+  <!-- Live tracker -->
+  <section class="card" id="section-tracker">
+    <p class="eyebrow">LIVE TRACKER — TUE 24 NOV 2026, DENSE FOG IN LAHORE</p>
+    <h2>Hania &amp; Zain are on the van.</h2>
+    <p class="hint">Ayesha, 34, Lahore, sends Hania (10) and Zain (7) to The City School, Gulberg Campus, on van VP-2026-011. Today, in dense fog, the van is running 25 minutes late — ETA school 8:10 AM, was 7:45 AM. Both children boarded at 7:35 AM.</p>
+    <div class="verify-row">
+      <label>Choose a van
+        <select id="van-select"></select>
+      </label>
+    </div>
+    <div id="tracker-status"></div>
+    <h3>Stops on this route</h3>
+    <div id="tracker-stops"></div>
+    <h3>Your children on this van</h3>
+    <div id="boarding-list"></div>
+    <p id="tracker-summary"></p>
+    <div id="tracker-driver"></div>
+  </section>
+
+  <!-- Routes & fees -->
+  <section class="card" id="section-routes" style="display:none">
+    <p class="eyebrow">ROUTES &amp; FEES — 10 SAMPLE VANS, 6 CITIES</p>
+    <h2>One route. Every stop, on time.</h2>
+    <p class="hint">Ten sample vans across Lahore, Karachi, Islamabad, Rawalpindi, Peshawar and Multan. This morning: 5 on time, 4 delayed in fog, 1 cancelled in Peshawar. Search by city, school or van ID.</p>
+    <div class="verify-row">
+      <label>Search vans
+        <input id="route-search" type="text" value="" placeholder="Try: Lahore, Gulberg, VP-2026-011">
+      </label>
+      <label>Sort by
+        <select id="route-sort">
+          <option value="status">Delayed &amp; cancelled first</option>
+          <option value="city">City</option>
+          <option value="fee">Lowest fee first</option>
+        </select>
+      </label>
+    </div>
+    <div id="route-list"></div>
+    <p id="route-summary"></p>
+    <h3>Work out your monthly fee</h3>
+    <p class="hint">Fee bands, per child per month: 0–3 km Rs 4,500; 3–6 km Rs 6,500; 6–10 km Rs 8,000; 10+ km Rs 9,000. Ayesha: 5.2 km, 2 children — Rs 6,500 each, Rs 13,000 a month.</p>
+    <div class="verify-row">
+      <label>Home-to-school distance (km)
+        <input id="fee-km-input" type="number" value="5.2" min="0" step="0.1">
+      </label>
+      <label>Children riding the van
+        <input id="fee-children-input" type="number" value="2" min="0" step="1">
+      </label>
+      <button id="fee-btn">Work out my fee</button>
+    </div>
+    <div id="fee-result"></div>
+  </section>
+
+  <!-- Driver & safety -->
+  <section class="card" id="section-driver" style="display:none">
+    <p class="eyebrow">DRIVER &amp; SAFETY — VERIFIED BEFORE THE FIRST RIDE</p>
+    <h2>A driver you can verify.</h2>
+    <p class="hint">Bilal Ahmed: 8 years driving school vans, licence (LTV) verified, police clearance verified, 4.9 stars across 128 rides with no complaints. If a different driver turns up, the app tells you first.</p>
+    <div class="verify-row">
+      <label>Choose a van
+        <select id="driver-van-select"></select>
+      </label>
+    </div>
+    <div id="driver-card"></div>
+    <div id="van-card"></div>
+    <h3>Emergency</h3>
+    <p class="hint">One tap alerts the school and both parents at once — with the van's live location attached.</p>
+    <button id="emergency-btn">Alert school &amp; parents</button>
+    <div id="emergency-result"></div>
+    <h3>Report an issue</h3>
+    <p class="hint">Late pickup, rash driving, a different driver — report it in the app. The school sees it the same minute.</p>
+    <div class="verify-row">
+      <label>What happened?
+        <input id="report-text" type="text" value="" placeholder="e.g. The van was 40 minutes late today">
+      </label>
+      <button id="report-btn">Send my report</button>
+    </div>
+    <div id="report-list"></div>
+  </section>
+
+  <!-- Alerts & fees -->
+  <section class="card" id="section-alerts" style="display:none">
+    <p class="eyebrow">ALERTS &amp; FEES — LATE? CANCELLED? YOU KNOW FIRST.</p>
+    <h2>Late? Cancelled? You know first.</h2>
+    <p class="hint">Fog delay at 7:32 AM, a cancelled van in Peshawar at 6:50 AM, and the November fee receipt — Rs 13,000 paid 1 Nov via JazzCash, receipt VPR-2026-1187, next due 1 Dec 2026.</p>
+    <h3>Today's alerts</h3>
+    <div id="alerts-list"></div>
+    <h3>November fee — 2 children, 5.2 km</h3>
+    <div id="receipt-card"></div>
+    <h3>Mark absence</h3>
+    <p class="hint">Hania is sick tomorrow? Mark her absent — the van skips your stop and the driver knows.</p>
+    <div class="verify-row">
+      <label>Absence date
+        <input id="absence-date" type="date" value="2026-11-25">
+      </label>
+    </div>
+    <div id="absence-list"></div>
+    <p id="absence-summary"></p>
+    <h3>Get fog alerts for your van</h3>
+    <p class="hint">Sign up for delay, cancellation and boarding alerts for one van. Saved on this device.</p>
+    <div class="verify-row">
+      <label>Your name
+        <input id="alert-name-input" type="text" value="Ayesha" placeholder="Your name">
+      </label>
+      <label>Van ID
+        <input id="alert-van-input" type="text" value="VP-2026-011" placeholder="VP-2026-011">
+      </label>
+      <button id="alert-btn">Turn fog alerts on</button>
+    </div>
+    <div id="alert-result"></div>
+    <h3>Alert signups on this device</h3>
+    <div id="saved-alerts"></div>
+  </section>
+
+  <button id="reset-demo" class="secondary">Reset demo data</button>
+</main>
+
+<footer>
+  <p>VanPak is an unofficial UX concept by Muhammad Abbas Khan — not a school, not a transport company and not a van service. All vans, times, fares, drivers, schools and children are sample data. The school names are real institutions used as sample examples, not partners.</p>
+  <p>Available for new projects: abbasmomand98@gmail.com</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
